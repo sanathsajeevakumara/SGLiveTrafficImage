@@ -20,7 +20,7 @@ import androidx.navigation.NavController
 import com.sanathcoding.sglivetrafficimage.R
 import com.sanathcoding.sglivetrafficimage.core.util.UiText
 import com.sanathcoding.sglivetrafficimage.core.util.showToast
-import com.sanathcoding.sglivetrafficimage.navigation.Graph
+import com.sanathcoding.sglivetrafficimage.navigation.Screen
 
 @Composable
 fun LoginScreen(
@@ -36,11 +36,13 @@ fun LoginScreen(
             when (event) {
                 ValidateEvent.Success -> {
                     context.showToast(UiText.StringResource(R.string.login_successful))
-                    navController.navigate(Graph.HOME_SCREEN)
+//                    navController.navigate(Graph.HOME_SCREEN)
+                    navController.navigate(Screen.Home.route)
                 }
                 ValidateEvent.DataAdded -> {
                     context.showToast(UiText.StringResource(R.string.account_created))
-                    navController.navigate(Graph.HOME_SCREEN)
+//                    navController.navigate(Graph.HOME_SCREEN)
+                    navController.navigate(Screen.Home.route)
                 }
                 ValidateEvent.PasswordNotMatch -> {
                     context.showToast(UiText.StringResource(R.string.password_not_match_error))

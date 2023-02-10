@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.sanathcoding.sglivetrafficimage.navigation.Graph
+import com.sanathcoding.sglivetrafficimage.navigation.Screen
 
 @Composable
 fun CameraListScreen(
@@ -23,7 +23,7 @@ fun CameraListScreen(
             text = "Camera List Screen",
             fontSize = MaterialTheme.typography.h3.fontSize,
             modifier = Modifier.clickable {
-                navController.navigate(Graph.CAMERA_DETAIL_SCREEN)
+                navController.navigate(Screen.CameraDetail.createRoute("5"))
             }
         )
     }

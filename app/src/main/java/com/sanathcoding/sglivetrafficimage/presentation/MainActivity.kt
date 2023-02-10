@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
-import com.sanathcoding.sglivetrafficimage.navigation.graphs.RootNavigationGraph
+import com.sanathcoding.sglivetrafficimage.navigation.SetupNavGraph
 import com.sanathcoding.sglivetrafficimage.ui.theme.SGLiveTrafficImageTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,9 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SGLiveTrafficImageTheme {
-                RootNavigationGraph(
-                    navHostController = rememberNavController(),
-                )
+                SetupNavGraph(navController = rememberNavController())
             }
         }
     }
