@@ -9,7 +9,7 @@ class TrafficImageRepositoryImpl @Inject constructor(
     private val api: TrafficImageApi
 ): TrafficImageRepository {
 
-    override suspend fun getCameras(): TrafficImageDto {
-        return api.getTrafficCameras()
+    override suspend fun getTrafficImages(): TrafficImageDto {
+        return api.getTrafficImages()
     }
 }

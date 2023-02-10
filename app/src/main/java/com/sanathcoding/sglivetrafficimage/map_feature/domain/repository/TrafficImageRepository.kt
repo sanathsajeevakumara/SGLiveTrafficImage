@@ -4,6 +4,6 @@ import com.sanathcoding.sglivetrafficimage.core.data.remote.dto.TrafficImageDto
 
 interface TrafficImageRepository {
 
-    suspend fun getCameras(): TrafficImageDto
+    suspend fun getTrafficImages(): TrafficImageDto
 
 }
