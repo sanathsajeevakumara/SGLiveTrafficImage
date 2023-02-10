@@ -7,7 +7,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.sanathcoding.sglivetrafficimage.navigation.BottomNavBar
+import com.sanathcoding.sglivetrafficimage.core.navigation.BottomNavBar
 import com.sanathcoding.sglivetrafficimage.presentation.home_screen.screen.CameraListScreen
 import com.sanathcoding.sglivetrafficimage.presentation.home_screen.screen.MapScreen
 
