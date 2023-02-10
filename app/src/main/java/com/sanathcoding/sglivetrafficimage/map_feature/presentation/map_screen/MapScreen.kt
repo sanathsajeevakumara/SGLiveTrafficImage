@@ -1,4 +1,4 @@
-package com.sanathcoding.sglivetrafficimage.map_feature.presentation.home_screen.screen
+package com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

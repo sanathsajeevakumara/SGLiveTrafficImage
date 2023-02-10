@@ -1,4 +1,4 @@
-package com.sanathcoding.sglivetrafficimage.map_feature.presentation.home_screen
+package com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,8 +8,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.sanathcoding.sglivetrafficimage.core.navigation.BottomNavBar
-import com.sanathcoding.sglivetrafficimage.map_feature.presentation.home_screen.screen.CameraListScreen
-import com.sanathcoding.sglivetrafficimage.map_feature.presentation.home_screen.screen.MapScreen
+import com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.screen.CameraListScreen
+import com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.screen.MapScreen
 
 @Composable
 fun NewHome(navController: NavHostController) {
