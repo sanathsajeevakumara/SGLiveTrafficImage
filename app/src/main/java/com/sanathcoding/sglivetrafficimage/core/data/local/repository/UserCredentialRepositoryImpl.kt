@@ -6,13 +6,13 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.sanathcoding.sglivetrafficimage.core.constValue.ConstValue.PREFERENCES_NAME
+import com.sanathcoding.sglivetrafficimage.core.common.ConstValue.PREFERENCES_NAME
 import com.sanathcoding.sglivetrafficimage.core.data.local.UserCredentialDao
 import com.sanathcoding.sglivetrafficimage.core.data.local.UserCredentialEntity
 import com.sanathcoding.sglivetrafficimage.core.data.local.mapper.toUserCredential
 import com.sanathcoding.sglivetrafficimage.core.data.local.mapper.toUserCredentialEntity
-import com.sanathcoding.sglivetrafficimage.feature_login.domain.model.UserCredential
-import com.sanathcoding.sglivetrafficimage.feature_login.domain.repository.UserCredentialRepository
+import com.sanathcoding.sglivetrafficimage.login_feature.domain.model.UserCredential
+import com.sanathcoding.sglivetrafficimage.login_feature.domain.repository.UserCredentialRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
