@@ -7,6 +7,6 @@ data class MapState(
     val isLoading: Boolean = false,
     val properties: MapProperties = MapProperties(),
     val trafficImage: TrafficImage? = null,
-    val isFallOutMap: Boolean = false,
+//    val isFallOutMap: Boolean = false,
     val error: String = ""
 )

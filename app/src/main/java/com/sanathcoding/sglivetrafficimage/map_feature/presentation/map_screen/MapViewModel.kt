@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sanathcoding.sglivetrafficimage.core.common.Resource
-import com.sanathcoding.sglivetrafficimage.core.util.UiText
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.get_traffic_image.GetTrafficImageUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
