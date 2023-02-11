@@ -24,7 +24,6 @@ import com.sanathcoding.sglivetrafficimage.core.navigation.Screen
 import com.sanathcoding.sglivetrafficimage.core.util.UiText
 import com.sanathcoding.sglivetrafficimage.core.util.showToast
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreen(
     navController: NavController,

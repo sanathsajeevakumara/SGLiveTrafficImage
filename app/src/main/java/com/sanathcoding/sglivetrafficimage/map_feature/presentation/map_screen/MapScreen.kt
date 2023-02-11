@@ -34,20 +34,15 @@ fun MapScreen(
         cameraPositionState = cameraPositionState
     ) {
 
-        state.trafficImage?.let {
-            it.items.map { item ->
-                item.cameras.map { camera ->
-
-                    MarkerInfoWindow(
-                        state = MarkerState(LatLng(camera.location.latitude, camera.location.longitude)),
-                        title = "Location (${camera.location.latitude}, ${camera.location.longitude})",
-                        icon = BitmapDescriptorFactory.defaultMarker(
-                            BitmapDescriptorFactory.HUE_RED
-                        ),
-                    ) {
-                        MarkerContent(camera = camera)
-                    }
-                }
+        state.camera?.forEach { camera ->
+            MarkerInfoWindow(
+                state = MarkerState(LatLng(camera.location.latitude, camera.location.longitude)),
+                title = "Location (${camera.location.latitude}, ${camera.location.longitude})",
+                icon = BitmapDescriptorFactory.defaultMarker(
+                    BitmapDescriptorFactory.HUE_RED
+                ),
+            ) {
+                MarkerContent(camera = camera)
             }
         }
     }

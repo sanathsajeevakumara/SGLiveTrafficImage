@@ -15,17 +15,27 @@ import javax.inject.Inject
 
 class TrafficImageRepositoryImpl @Inject constructor(
     private val api: TrafficImageApi
-): TrafficImageRepository {
-    override suspend fun getTrafficImages(): Flow<Resource<List<Camera>>> = flow {
+) : TrafficImageRepository {
+    override fun getTrafficImages(): Flow<Resource<List<Camera>>> = flow {
         emit(Resource.Loading())
         try {
             emit(Resource.Loading())
-            val cameras = api.getTrafficImages()
-            emit(Resource.Success(cameras.map { it.toCamera() }))
+            val trafficImage = api.getTrafficImages().toTrafficImage()
+            if (trafficImage.items.isNotEmpty()) {
+                trafficImage.items.map { item ->
+                    emit(Resource.Success(item.cameras))
+                }
+            } else emit(Resource.Success(emptyList()))
+
+
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
         } catch (e: IOException) {
-            emit(Resource.Error(e.localizedMessage ?: "Couldn't reach server. Check your internet connection"))
+            emit(
+                Resource.Error(
+                    e.localizedMessage ?: "Couldn't reach server. Check your internet connection"
+                )
+            )
         }
     }
 

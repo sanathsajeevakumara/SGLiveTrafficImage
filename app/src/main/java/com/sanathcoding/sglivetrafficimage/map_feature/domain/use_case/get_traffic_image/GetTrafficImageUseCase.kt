@@ -4,7 +4,6 @@ import com.sanathcoding.sglivetrafficimage.core.common.Resource
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.Camera
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.repository.TrafficImageRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GetTrafficImageUseCase @Inject constructor(
