@@ -25,18 +25,7 @@ import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.Camera
 @Composable
 fun MarkerContent(camera: Camera) {
 
-    //getting the web image
-    //Save image as bitmap
-    var bitmap by remember { mutableStateOf<Bitmap?>(null) }
-
-    Glide.with(LocalContext.current).asBitmap()
-        .load(camera.image)
-        .into(object : CustomTarget<Bitmap>() {
-            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                bitmap = resource
-            }
-            override fun onLoadCleared(placeholder: Drawable?) {}
-        })
+    val bitmapImage = loadUrlImage(url = camera.image)
 
     Box(
         modifier = Modifier
@@ -53,14 +42,13 @@ fun MarkerContent(camera: Camera) {
             Text(text = "Time Stamp: ${camera.timestamp}")
             Spacer(modifier = Modifier.height(16.dp))
 
-            //Load bitmap image to Image composable
-            if (bitmap != null)
+            if (bitmapImage != null) {
                 Image(
-                    bitmap!!.asImageBitmap(),
+                    bitmapImage.asImageBitmap(),
                     "Image Location",
                     Modifier.size(150.dp)
                 )
-            else Text("Loading Image...")
+            } else Text("Loading Image...")
 
             Spacer(modifier = Modifier.height(16.dp))
             Text(
