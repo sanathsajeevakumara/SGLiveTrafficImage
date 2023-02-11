@@ -12,3 +12,13 @@ fun CameraEntity.toCamera(): Camera {
         timestamp = timestamp
     )
 }
+
+fun Camera.toCameraEntity(): CameraEntity {
+    return CameraEntity(
+        cameraId = cameraId,
+        image = image,
+        imageMetadata = imageMetadata,
+        location = location,
+        timestamp = timestamp
+    )
+}
