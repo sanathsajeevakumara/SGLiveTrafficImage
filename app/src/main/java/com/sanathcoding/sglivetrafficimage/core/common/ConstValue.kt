@@ -7,5 +7,6 @@ object ConstValue {
     const val USER_NAME = "userName"
     const val LOGIN = "login"
     const val CAMERA_DETAIL = "camera_detail"
+
     const val BASE_URL = "https://api.data.gov.sg"
 }

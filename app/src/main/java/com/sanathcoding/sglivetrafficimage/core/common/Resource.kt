@@ -1,6 +1,5 @@
 package com.sanathcoding.sglivetrafficimage.core.common
 
-import com.sanathcoding.sglivetrafficimage.core.util.UiText
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T): Resource<T>(data)
