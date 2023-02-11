@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MapViewModel @Inject constructor(
     private val getTrafficImageUseCase: GetTrafficImageUseCase,
-    private val searchUseCase: SearchUseCase
+//    private val searchUseCase: SearchUseCase
 ): ViewModel() {
 
     var mapState by mutableStateOf(MapState())

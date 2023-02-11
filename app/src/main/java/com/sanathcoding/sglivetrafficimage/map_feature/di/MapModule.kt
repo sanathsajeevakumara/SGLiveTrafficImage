@@ -4,10 +4,13 @@ import android.app.Application
 import androidx.room.Room
 import com.google.gson.Gson
 import com.sanathcoding.sglivetrafficimage.core.common.ConstValue.BASE_URL
+import com.sanathcoding.sglivetrafficimage.map_feature.data.ImageMetaDataConverter
+import com.sanathcoding.sglivetrafficimage.map_feature.data.LocationConverter
 import com.sanathcoding.sglivetrafficimage.map_feature.data.local.CameraDataBase
 import com.sanathcoding.sglivetrafficimage.map_feature.data.remote.TrafficImageApi
 import com.sanathcoding.sglivetrafficimage.map_feature.data.remote.repository.TrafficImageRepositoryImpl
 import com.sanathcoding.sglivetrafficimage.map_feature.data.util.GsonParser
+import com.sanathcoding.sglivetrafficimage.map_feature.data.util.JsonParser
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.repository.TrafficImageRepository
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.GetTrafficImageUseCase
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.SearchUseCase
@@ -38,11 +41,14 @@ object MapModule {
     @Provides
     @Singleton
     fun provideCameraDatabase(app: Application): CameraDataBase {
+        val locationConverter = LocationConverter(GsonParser(Gson()))
+        val imageMetaDataConverter = ImageMetaDataConverter(GsonParser(Gson()))
         return Room.databaseBuilder(
             app,
             CameraDataBase::class.java,
             "camera.db"
-        ).addTypeConverter(GsonParser(Gson()))
+        ).addTypeConverter(locationConverter)
+            .addTypeConverter(imageMetaDataConverter)
             .build()
     }
 
@@ -56,10 +62,10 @@ object MapModule {
             .create(TrafficImageApi::class.java)
     }
 
-    @Provides
-    @Singleton
-    fun provideSearchUseCase(): SearchUseCase {
-        return SearchUseCase()
-    }
+//    @Provides
+//    @Singleton
+//    fun provideSearchUseCase(): SearchUseCase {
+//        return SearchUseCase()
+//    }
 
 }

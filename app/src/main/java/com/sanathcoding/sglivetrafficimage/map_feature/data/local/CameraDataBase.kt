@@ -8,7 +8,8 @@ import com.sanathcoding.sglivetrafficimage.map_feature.data.LocationConverter
 
 @Database(
     entities = [CameraEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(LocationConverter::class, ImageMetaDataConverter::class)
 abstract class CameraDataBase: RoomDatabase() {

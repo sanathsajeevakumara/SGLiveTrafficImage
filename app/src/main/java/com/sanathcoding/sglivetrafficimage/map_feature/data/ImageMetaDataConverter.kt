@@ -15,7 +15,7 @@ class ImageMetaDataConverter(
     fun fromImageMetaDataJson(json: String): ImageMetaData {
         return jsonParser.fromJson<ImageMetaData>(
             json,
-            object : TypeToken<Location>(){}.type
+            object : TypeToken<ImageMetaData>(){}.type
         ) ?: ImageMetaData(height = 0, md5 = "", width = 0)
     }
 
@@ -23,7 +23,7 @@ class ImageMetaDataConverter(
     fun toImageMetaDataJson(imageMetaData: ImageMetaData): String {
         return jsonParser.toJson(
             imageMetaData,
-            object : TypeToken<Location>(){}.type
+            object : TypeToken<ImageMetaData>(){}.type
         ) ?: ""
     }
 }

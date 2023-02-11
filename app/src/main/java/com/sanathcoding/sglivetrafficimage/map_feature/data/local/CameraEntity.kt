@@ -7,7 +7,7 @@ import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.Location
 
 @Entity
 data class CameraEntity(
-    @PrimaryKey val id: Int,
+    @PrimaryKey val id: Int? = null,
     val cameraId: String,
     val image: String,
     val imageMetadata: ImageMetaData,
