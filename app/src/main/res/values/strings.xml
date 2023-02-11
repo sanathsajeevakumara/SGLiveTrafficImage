@@ -5,7 +5,7 @@
     <string name="user_name_max_error">Username value length exceeds 20 characters</string>
     <string name="password_blank_error">Password can not be blank</string>
     <string name="password_dont_contain_letter_or_digit_error">Password should consist minimum 1 number, 1 upper case character, 1 lower case character and 1 special character</string>
-    <string name="login_successful">Login Successfull</string>
+    <string name="login_successful">Login Successful</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>

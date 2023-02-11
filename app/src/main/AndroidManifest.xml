@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".SGLiveTrafficImageApplication"
         android:allowBackup="true"
@@ -13,7 +15,7 @@
         android:theme="@style/Theme.SGLiveTrafficImage"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.SGLiveTrafficImage">
@@ -23,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="${GMP_KEY}"/>
     </application>
 
 </manifest>
