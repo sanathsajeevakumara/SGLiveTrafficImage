@@ -1,4 +1,4 @@
-package com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.get_traffic_image
+package com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case
 
 import com.sanathcoding.sglivetrafficimage.core.common.Resource
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.Camera

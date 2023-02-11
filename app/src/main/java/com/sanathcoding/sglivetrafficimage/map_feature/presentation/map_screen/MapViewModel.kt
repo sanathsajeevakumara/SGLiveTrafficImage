@@ -6,30 +6,60 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sanathcoding.sglivetrafficimage.core.common.Resource
-import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.get_traffic_image.GetTrafficImageUseCase
+import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.GetTrafficImageUseCase
+import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
-    private val getTrafficImageUseCase: GetTrafficImageUseCase
+    private val getTrafficImageUseCase: GetTrafficImageUseCase,
+    private val searchUseCase: SearchUseCase
 ): ViewModel() {
 
     var mapState by mutableStateOf(MapState())
 
+    private val _searchText = MutableStateFlow("")
+    val searchText = _searchText.asStateFlow()
+
+    private val _isSearching = MutableStateFlow(false)
+    val isSearching = _isSearching.asStateFlow()
+
+    private val _mapEvent = MutableSharedFlow<MapEvent>()
+    val mapEvent = _mapEvent.asSharedFlow()
+
+
     init {
         getTrafficImages()
     }
+
+//    private val _camera = MutableStateFlow(cameraList)
+//    val cameras = searchText.combine(_camera) { text, camera ->
+//        val queryValidation = searchUseCase.execute(text)
+//        if (queryValidation.isSuccessful) {
+//            camera?.filter {
+//                searchUseCase.doseMatchSearchQuery(text)
+//            }
+//        } else camera
+//    }.stateIn(
+//        viewModelScope,
+//        SharingStarted.WhileSubscribed(5000L),
+//        _camera.value
+//    )
+
 
     private fun getTrafficImages() {
         getTrafficImageUseCase().onEach { resource ->
             when (resource) {
                 is Resource.Error -> {
                     mapState = mapState.copy(
-                        error = resource.message ?: "An Unexpected error occurred"
+                        error = resource.message ?: "An Unexpected error occurred",
+                        isLoading = false
                     )
+                    _mapEvent.emit(MapEvent.ShowSnackBar(
+                        resource.message?: "Unknown error"
+                    ))
                 }
                 is Resource.Loading -> {
                     mapState = mapState.copy(
@@ -38,11 +68,16 @@ class MapViewModel @Inject constructor(
                 }
                 is Resource.Success -> {
                     mapState = mapState.copy(
-                        camera = resource.data
+                        camera = resource.data ?: emptyList(),
+                        isLoading = false
                     )
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun onSearchTextChange(text: String) {
+        _searchText.value = text
     }
 
 }

@@ -1,9 +1,10 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.di
 
 import com.sanathcoding.sglivetrafficimage.core.common.ConstValue.BASE_URL
-import com.sanathcoding.sglivetrafficimage.core.data.remote.TrafficImageApi
-import com.sanathcoding.sglivetrafficimage.core.data.remote.repository.TrafficImageRepositoryImpl
+import com.sanathcoding.sglivetrafficimage.map_feature.data.remote.TrafficImageApi
+import com.sanathcoding.sglivetrafficimage.map_feature.data.remote.repository.TrafficImageRepositoryImpl
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.repository.TrafficImageRepository
+import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.SearchUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +31,12 @@ object MapModule {
     @Singleton
     fun provideTrafficImageRepository(api: TrafficImageApi): TrafficImageRepository {
         return TrafficImageRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchUseCase(): SearchUseCase {
+        return SearchUseCase()
     }
 
 }
