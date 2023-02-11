@@ -1,25 +1,20 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_details_screen
 
-
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_details_screen.component.CameraDetailView
+import com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.MapViewModel
 
 @Composable
 fun CameraDetailScreen(
     cameraId: String,
+    viewModel: MapViewModel = hiltViewModel(),
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "Number is $cameraId",
-            fontSize = MaterialTheme.typography.h3.fontSize,
-        )
+    val state = viewModel.mapState
+
+    state.camera?.onEach { camera ->
+        if (cameraId == camera.cameraId) {
+            CameraDetailView(camera)
+        }
     }
 }

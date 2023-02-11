@@ -38,7 +38,7 @@ class MapViewModel @Inject constructor(
                 }
                 is Resource.Success -> {
                     mapState = mapState.copy(
-                        trafficImage = resource.data
+                        camera = resource.data
                     )
                 }
             }
