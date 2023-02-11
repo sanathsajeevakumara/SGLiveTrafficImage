@@ -2,27 +2,29 @@
 package com.sanathcoding.sglivetrafficimage.login_feature.presentation.loginScreen
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
 import com.sanathcoding.sglivetrafficimage.R
 import com.sanathcoding.sglivetrafficimage.core.navigation.Screen
 import com.sanathcoding.sglivetrafficimage.core.util.UiText
 import com.sanathcoding.sglivetrafficimage.core.util.showToast
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreen(
     navController: NavController,
@@ -31,6 +33,8 @@ fun LoginScreen(
 
     val state = viewModel.state
     val context = LocalContext.current
+    val focusManager = LocalFocusManager.current
+
 
     LaunchedEffect(key1 = context) {
         viewModel.validationEvents.collect { event ->
@@ -82,7 +86,10 @@ fun LoginScreen(
                     text = UiText.StringResource(R.string.username).asString()
                 )
             },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next
+            )
         )
         if (state.userNameErrorMsg != null) {
             Text(
@@ -107,8 +114,12 @@ fun LoginScreen(
                     text = UiText.StringResource(R.string.password).asString()
                 )
             },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            visualTransformation = PasswordVisualTransformation()
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(
+                onDone = {focusManager.clearFocus()})
         )
         if (state.passwordErrorMsg != null) {
             Text(
@@ -121,6 +132,7 @@ fun LoginScreen(
 
         Button(
             onClick = {
+                focusManager.clearFocus()
                 viewModel.onEvent(LoginEvent.Login)
             },
             modifier = Modifier.align(Alignment.End)
@@ -130,20 +142,4 @@ fun LoginScreen(
 
     }
 
-}
-
-@Composable
-fun showDialog() {
-    Dialog(onDismissRequest = {}) {
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight(),
-            shape = RoundedCornerShape(size = 10.dp)
-        ) {
-            Column(modifier = Modifier.padding(all = 16.dp)) {
-                Text(text = "Your Dialog UI Here")
-            }
-        }
-    }
 }
