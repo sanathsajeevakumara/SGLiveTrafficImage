@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface TrafficImageRepository {
 
-    suspend fun getTrafficImages(): Flow<Resource<List<Camera>>>
+    fun getTrafficImages(): Flow<Resource<List<Camera>>>
 
 }
