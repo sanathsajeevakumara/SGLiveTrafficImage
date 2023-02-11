@@ -1,4 +1,4 @@
-package com.sanathcoding.sglivetrafficimage.core.data.local
+package com.sanathcoding.sglivetrafficimage.login_feature.data.local
 
 data class FavoriteCameraEntity(
     val cameraId: String,

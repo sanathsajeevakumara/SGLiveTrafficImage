@@ -1,4 +1,4 @@
-package com.sanathcoding.sglivetrafficimage.core.data.local
+package com.sanathcoding.sglivetrafficimage.login_feature.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

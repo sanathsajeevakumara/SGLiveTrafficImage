@@ -1,4 +1,4 @@
-package com.sanathcoding.sglivetrafficimage.core.data.local.repository
+package com.sanathcoding.sglivetrafficimage.login_feature.data.local.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -7,10 +7,10 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.sanathcoding.sglivetrafficimage.core.common.ConstValue.PREFERENCES_NAME
-import com.sanathcoding.sglivetrafficimage.core.data.local.UserCredentialDao
-import com.sanathcoding.sglivetrafficimage.core.data.local.UserCredentialEntity
-import com.sanathcoding.sglivetrafficimage.core.data.local.mapper.toUserCredential
-import com.sanathcoding.sglivetrafficimage.core.data.local.mapper.toUserCredentialEntity
+import com.sanathcoding.sglivetrafficimage.login_feature.data.local.UserCredentialDao
+import com.sanathcoding.sglivetrafficimage.login_feature.data.local.UserCredentialEntity
+import com.sanathcoding.sglivetrafficimage.login_feature.data.local.mapper.toUserCredential
+import com.sanathcoding.sglivetrafficimage.login_feature.data.local.mapper.toUserCredentialEntity
 import com.sanathcoding.sglivetrafficimage.login_feature.domain.model.UserCredential
 import com.sanathcoding.sglivetrafficimage.login_feature.domain.repository.UserCredentialRepository
 import kotlinx.coroutines.flow.Flow

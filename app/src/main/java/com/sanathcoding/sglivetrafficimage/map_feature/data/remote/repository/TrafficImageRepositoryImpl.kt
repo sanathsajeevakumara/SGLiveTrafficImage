@@ -1,9 +1,9 @@
-package com.sanathcoding.sglivetrafficimage.core.data.remote.repository
+package com.sanathcoding.sglivetrafficimage.map_feature.data.remote.repository
 
 import com.sanathcoding.sglivetrafficimage.core.common.Resource
-import com.sanathcoding.sglivetrafficimage.core.data.remote.TrafficImageApi
-import com.sanathcoding.sglivetrafficimage.core.data.remote.mapper.toCamera
-import com.sanathcoding.sglivetrafficimage.core.data.remote.mapper.toTrafficImage
+import com.sanathcoding.sglivetrafficimage.map_feature.data.remote.TrafficImageApi
+import com.sanathcoding.sglivetrafficimage.map_feature.data.remote.mapper.toCamera
+import com.sanathcoding.sglivetrafficimage.map_feature.data.remote.mapper.toTrafficImage
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.Camera
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.TrafficImage
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.repository.TrafficImageRepository

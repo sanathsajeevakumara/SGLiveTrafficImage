@@ -1,6 +1,6 @@
-package com.sanathcoding.sglivetrafficimage.core.data.local.mapper
+package com.sanathcoding.sglivetrafficimage.login_feature.data.local.mapper
 
-import com.sanathcoding.sglivetrafficimage.core.data.local.UserCredentialEntity
+import com.sanathcoding.sglivetrafficimage.login_feature.data.local.UserCredentialEntity
 import com.sanathcoding.sglivetrafficimage.login_feature.domain.model.UserCredential
 
 fun UserCredentialEntity.toUserCredential(): UserCredential {
