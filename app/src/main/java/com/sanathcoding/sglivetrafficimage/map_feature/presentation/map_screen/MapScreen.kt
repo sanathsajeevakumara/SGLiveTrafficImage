@@ -1,28 +1,29 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.rememberAsyncImagePainter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.MapUiSettings
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.rememberCameraPositionState
+import com.google.maps.android.compose.*
 import com.sanathcoding.sglivetrafficimage.core.data.remote.dto.Camera
-import com.sanathcoding.sglivetrafficimage.core.data.remote.dto.Location
 
 @Composable
 fun MapScreen(
@@ -48,41 +49,66 @@ fun MapScreen(
         cameraPositionState = cameraPositionState
     ) {
 
-
-
         state.trafficImage?.let {
             it.items.map { item ->
                 item.cameras.map { camera ->
-                    Marker(
-                        position = LatLng(camera.location.latitude, camera.location.longitude),
+
+                    MarkerInfoWindow(
+                        state = MarkerState(LatLng(camera.location.latitude, camera.location.longitude)),
                         title = "Location (${camera.location.latitude}, ${camera.location.longitude})",
-                        onClick = { maker ->
-                            maker.showInfoWindow()
-                            true
-                        },
                         icon = BitmapDescriptorFactory.defaultMarker(
                             BitmapDescriptorFactory.HUE_RED
-                        )
-                    )
+                        ),
+                    ) {
+                        MarkerContent(camera = camera)
+                    }
                 }
             }
         }
     }
 }
+
 @Composable
 fun MarkerContent(camera: Camera) {
-    Column(
+
+    //Save image as bitmap
+    var bitmap by remember { mutableStateOf<Bitmap?>(null)}
+
+    Glide.with(LocalContext.current).asBitmap()
+        .load(camera.image)
+        .into(object : CustomTarget<Bitmap>() {
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                bitmap = resource
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {}
+        })
+
+    Box(
         modifier = Modifier
-            .height(180.dp)
-            .width(180.dp)
-    ) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Text(text = "Time Stamp: ${camera.timestamp}")
-            Image(
-                painter = rememberAsyncImagePainter(camera.image),
-                contentDescription = null,
-                modifier = Modifier.size(80.dp)
+            .background(
+                color = MaterialTheme.colors.onPrimary,
+                shape = RoundedCornerShape(5.dp)
             )
+        ,
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = "Time Stamp: ${camera.timestamp}")
+
+//            Load bitmap image to Image composable
+            if (bitmap != null )
+                Image(
+                    bitmap!!.asImageBitmap(),
+                    "Image Location",
+                    Modifier.size(150.dp)
+                )
+            else
+                Text("Loading Image...")
+
+            Log.d("MapScreen", "Location Image url : ${camera.image}")
 
             Text(text = "Location:")
             Spacer(modifier = Modifier.width(10.dp))

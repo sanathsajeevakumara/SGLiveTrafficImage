@@ -1,13 +1,11 @@
+
 package com.sanathcoding.sglivetrafficimage.login_feature.presentation.loginScreen
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -15,12 +13,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.sanathcoding.sglivetrafficimage.R
+import com.sanathcoding.sglivetrafficimage.core.navigation.Screen
 import com.sanathcoding.sglivetrafficimage.core.util.UiText
 import com.sanathcoding.sglivetrafficimage.core.util.showToast
-import com.sanathcoding.sglivetrafficimage.core.navigation.Screen
 
 @Composable
 fun LoginScreen(
@@ -36,12 +37,10 @@ fun LoginScreen(
             when (event) {
                 ValidateEvent.Success -> {
                     context.showToast(UiText.StringResource(R.string.login_successful))
-//                    navController.navigate(Graph.HOME_SCREEN)
                     navController.navigate(Screen.Home.route)
                 }
                 ValidateEvent.DataAdded -> {
                     context.showToast(UiText.StringResource(R.string.account_created))
-//                    navController.navigate(Graph.HOME_SCREEN)
                     navController.navigate(Screen.Home.route)
                 }
                 ValidateEvent.PasswordNotMatch -> {
@@ -131,4 +130,20 @@ fun LoginScreen(
 
     }
 
+}
+
+@Composable
+fun showDialog() {
+    Dialog(onDismissRequest = {}) {
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            shape = RoundedCornerShape(size = 10.dp)
+        ) {
+            Column(modifier = Modifier.padding(all = 16.dp)) {
+                Text(text = "Your Dialog UI Here")
+            }
+        }
+    }
 }

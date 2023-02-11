@@ -41,12 +41,8 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    var userName by mutableStateOf(
-        getUserNameFromDataStore() ?: ""
-    )
-        private set
+    var userName by mutableStateOf(getUserNameFromDataStore() ?: "")
     var password by mutableStateOf("")
-        private set
 
     private val validationEventChannel = Channel<ValidateEvent>()
     val validationEvents = validationEventChannel.receiveAsFlow()
@@ -54,13 +50,9 @@ class LoginViewModel @Inject constructor(
     private var passwordFromDb: String? = ""
     private var userCount = 0
 
-    fun updateUserName(email: String) {
-        userName = email
-    }
+    fun updateUserName(email: String) { userName = email }
 
-    fun updatePassword(userPassword: String) {
-        password = userPassword
-    }
+    fun updatePassword(userPassword: String) { password = userPassword }
 
     fun onEvent(event: LoginEvent) {
         when (event) {
@@ -91,7 +83,7 @@ class LoginViewModel @Inject constructor(
         if (hasError) return
 
         viewModelScope.launch(Dispatchers.IO) {
-            userCount = repository.doseUserExist(userName)
+
             if (userName == getUserNameFromDataStore()) {
                 passwordFromDb = repository.getPasswordByUserName(userName).password
                 if (password == passwordFromDb) {
@@ -105,6 +97,7 @@ class LoginViewModel @Inject constructor(
                 }
             }
             else {
+                userCount = repository.doseUserExist(userName)
                 if (userCount == 0) {
                     insertUserToDataBase(userName, password)
                     saveUserNameToDataStore(userName)
