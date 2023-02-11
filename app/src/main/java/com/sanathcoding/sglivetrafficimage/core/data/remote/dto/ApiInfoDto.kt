@@ -1,5 +1,5 @@
 package com.sanathcoding.sglivetrafficimage.core.data.remote.dto
 
-data class ApiInfo(
+data class ApiInfoDto(
     val status: String
 )

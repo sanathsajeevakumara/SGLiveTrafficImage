@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class TrafficImageDto(
     @SerializedName("api_info")
-    val apiInfo: ApiInfo,
-    val items: List<Item>
+    val apiInfo: ApiInfoDto,
+    val items: List<ItemDto>
 )

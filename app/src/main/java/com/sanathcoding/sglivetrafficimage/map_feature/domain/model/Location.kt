@@ -1,4 +1,4 @@
-package com.sanathcoding.sglivetrafficimage.core.data.remote.dto
+package com.sanathcoding.sglivetrafficimage.map_feature.domain.model
 
 data class Location(
     val latitude: Double,
