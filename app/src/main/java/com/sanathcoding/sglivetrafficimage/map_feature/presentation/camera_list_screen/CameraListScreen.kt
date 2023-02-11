@@ -22,7 +22,7 @@ fun CameraListScreen(
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {
-            state.camera?.forEach { camera ->
+            state.camera?.forEach {
                 items(state.camera.size) { i ->
                     TrafficCameraList(
                         camera = state.camera[i],
