@@ -20,13 +20,7 @@ fun CameraDetailView(camera: Camera) {
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(
-            text = "Camera No ${camera.cameraId}",
-            fontWeight = FontWeight.Normal,
-            fontSize = 34.sp,
-            letterSpacing = 0.25.sp,
-        )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(32.dp))
         GlideImage(
             model = camera.image,
             contentDescription = "Location Image",

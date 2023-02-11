@@ -3,9 +3,9 @@ package com.sanathcoding.sglivetrafficimage.login_feature.di
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
-import com.sanathcoding.sglivetrafficimage.core.data.local.UserCredentialDao
-import com.sanathcoding.sglivetrafficimage.core.data.local.UserCredentialDataBase
-import com.sanathcoding.sglivetrafficimage.core.data.local.repository.UserCredentialRepositoryImpl
+import com.sanathcoding.sglivetrafficimage.login_feature.data.local.UserCredentialDao
+import com.sanathcoding.sglivetrafficimage.login_feature.data.local.UserCredentialDataBase
+import com.sanathcoding.sglivetrafficimage.login_feature.data.local.repository.UserCredentialRepositoryImpl
 import com.sanathcoding.sglivetrafficimage.login_feature.domain.repository.UserCredentialRepository
 import com.sanathcoding.sglivetrafficimage.login_feature.domain.use_case.ValidatePassword
 import com.sanathcoding.sglivetrafficimage.login_feature.domain.use_case.ValidateUserName

@@ -1,6 +1,6 @@
 package com.sanathcoding.sglivetrafficimage.login_feature.domain.repository
 
-import com.sanathcoding.sglivetrafficimage.core.data.local.UserCredentialEntity
+import com.sanathcoding.sglivetrafficimage.login_feature.data.local.UserCredentialEntity
 import com.sanathcoding.sglivetrafficimage.login_feature.domain.model.UserCredential
 import kotlinx.coroutines.flow.Flow
 

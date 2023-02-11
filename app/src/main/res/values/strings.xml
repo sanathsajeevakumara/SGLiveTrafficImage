@@ -13,4 +13,5 @@
     <string name="account_created">Account created successfully</string>
     <string name="password_not_match_error">Password not match!</string>
     <string name="camera_id_required">Camera id is required</string>
+    <string name="query_blank_error">Query can not blank</string>
 </resources>
