@@ -2,10 +2,12 @@ package com.sanathcoding.sglivetrafficimage.map_feature.di
 
 import android.app.Application
 import androidx.room.Room
+import com.google.gson.Gson
 import com.sanathcoding.sglivetrafficimage.core.common.ConstValue.BASE_URL
 import com.sanathcoding.sglivetrafficimage.map_feature.data.local.CameraDataBase
 import com.sanathcoding.sglivetrafficimage.map_feature.data.remote.TrafficImageApi
 import com.sanathcoding.sglivetrafficimage.map_feature.data.remote.repository.TrafficImageRepositoryImpl
+import com.sanathcoding.sglivetrafficimage.map_feature.data.util.GsonParser
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.repository.TrafficImageRepository
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.GetTrafficImageUseCase
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.SearchUseCase
@@ -40,7 +42,8 @@ object MapModule {
             app,
             CameraDataBase::class.java,
             "camera.db"
-        ).build()
+        ).addTypeConverter(GsonParser(Gson()))
+            .build()
     }
 
     @Provides
