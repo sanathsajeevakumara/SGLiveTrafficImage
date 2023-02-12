@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sanathcoding.sglivetrafficimage.core.common.Resource
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.GetTrafficImageUseCase
-import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -15,7 +14,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MapViewModel @Inject constructor(
     private val getTrafficImageUseCase: GetTrafficImageUseCase,
-//    private val searchUseCase: SearchUseCase
 ): ViewModel() {
 
     var mapState by mutableStateOf(MapState())
@@ -33,21 +31,6 @@ class MapViewModel @Inject constructor(
     init {
         getTrafficImages()
     }
-
-//    private val _camera = MutableStateFlow(cameraList)
-//    val cameras = searchText.combine(_camera) { text, camera ->
-//        val queryValidation = searchUseCase.execute(text)
-//        if (queryValidation.isSuccessful) {
-//            camera?.filter {
-//                searchUseCase.doseMatchSearchQuery(text)
-//            }
-//        } else camera
-//    }.stateIn(
-//        viewModelScope,
-//        SharingStarted.WhileSubscribed(5000L),
-//        _camera.value
-//    )
-
 
     private fun getTrafficImages() {
         getTrafficImageUseCase().onEach { resource ->

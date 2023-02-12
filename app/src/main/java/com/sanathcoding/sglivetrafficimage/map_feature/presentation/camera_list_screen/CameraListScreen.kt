@@ -22,9 +22,6 @@ fun CameraListScreen(
     viewModel: MapViewModel = hiltViewModel(),
 ) {
     val state = viewModel.mapState
-//    val searchText by viewModel.searchText.collectAsState()
-//    val camera by viewModel.cameras.collectAsState()
-//    val isSearching by viewModel.isSearching.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
         LazyColumn(

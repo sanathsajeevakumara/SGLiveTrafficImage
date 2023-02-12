@@ -62,10 +62,4 @@ object MapModule {
             .create(TrafficImageApi::class.java)
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideSearchUseCase(): SearchUseCase {
-//        return SearchUseCase()
-//    }
-
 }
