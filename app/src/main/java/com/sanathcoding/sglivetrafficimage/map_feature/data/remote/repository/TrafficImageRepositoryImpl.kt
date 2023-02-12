@@ -14,6 +14,10 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
+
+private const val HREF = "2023-02-11T15:50:47+08:00"
+private val ENCODED_HREF = java.net.URLEncoder.encode(HREF, "utf-8")
+
 class TrafficImageRepositoryImpl @Inject constructor(
     private val api: TrafficImageApi,
     private val dao: CameraDao

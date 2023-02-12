@@ -1,8 +1,6 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.component
 
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
-import android.util.Log
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,14 +11,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.Camera
+import com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_list_screen.component.FavoriteButton
+import com.sanathcoding.sglivetrafficimage.ui.theme.pinkRed
 
 @Composable
 fun MarkerContent(camera: Camera) {
@@ -51,6 +47,17 @@ fun MarkerContent(camera: Camera) {
             } else Text("Loading Image...")
 
             Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
+            ) {
+                FavoriteButton(
+                    modifier = Modifier.padding(8.dp),
+                    color = pinkRed
+                )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "Location",
                 fontWeight = FontWeight.Bold,

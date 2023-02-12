@@ -34,11 +34,8 @@ fun CameraListScreen(
                     Log.d("cameraList", "list size ${state.camera.size}")
                     TrafficCameraList(
                         camera = state.camera[i],
-                        onItemClick = {
-                            navController.navigate(
-                                Screen.CameraDetail.createRoute(state.camera[i].cameraId)
-                            )
-                        }
+                        navController
+
                     )
                 }
             }

@@ -7,4 +7,7 @@ interface TrafficImageApi {
 
     @GET("/v1/transport/traffic-images")
     suspend fun getTrafficImages(): TrafficImageDto
+
+    @GET("/v1/transport/traffic-images/{date_time}")
+    suspend fun getTrafficImageByTime(dateTime: String):TrafficImageDto
 }
