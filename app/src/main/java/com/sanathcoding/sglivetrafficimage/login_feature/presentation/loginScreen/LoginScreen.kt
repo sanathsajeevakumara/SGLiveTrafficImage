@@ -1,10 +1,12 @@
-
 package com.sanathcoding.sglivetrafficimage.login_feature.presentation.loginScreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -15,6 +17,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -33,7 +36,9 @@ fun LoginScreen(
     val state = viewModel.state
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
-
+    var revealPassword: MutableState<Boolean> = remember {
+        mutableStateOf(false)
+    }
 
     LaunchedEffect(key1 = context) {
         viewModel.validationEvents.collect { event ->
@@ -113,12 +118,43 @@ fun LoginScreen(
                     text = UiText.StringResource(R.string.password).asString()
                 )
             },
-            visualTransformation = PasswordVisualTransformation(),
+            visualTransformation = if (revealPassword.value) {
+                VisualTransformation.None
+            } else {
+                PasswordVisualTransformation()
+            },
+            trailingIcon = {
+                if (revealPassword.value) {
+                    IconButton(
+                        onClick = {
+                            revealPassword.value = false
+                        },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Visibility,
+                            contentDescription = "Visibility Icon"
+                        )
+                    }
+                } else {
+                    IconButton(
+                        onClick = {
+                            revealPassword.value = true
+                        },
+                    ) {
+
+                        Icon(
+                            imageVector = Icons.Filled.VisibilityOff,
+                            contentDescription = "Visibility Off icon"
+                        )
+                    }
+                }
+            },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password,
-                imeAction = ImeAction.Done),
+                imeAction = ImeAction.Done
+            ),
             keyboardActions = KeyboardActions(
-                onDone = {focusManager.clearFocus()})
+                onDone = { focusManager.clearFocus() })
         )
         if (state.passwordErrorMsg != null) {
             Text(
