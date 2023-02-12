@@ -28,7 +28,6 @@ class TrafficImageRepositoryImpl @Inject constructor(
             val remoteTrafficImage = api.getTrafficImages().toTrafficImage()
             if (remoteTrafficImage.items.isNotEmpty()) {
                 remoteTrafficImage.items.map { item ->
-//                    emit(Resource.Success(item.cameras))
                     dao.deleteCameras()
                     dao.insertCamera(item.cameras.map {it.toCameraEntity()})
                 }
