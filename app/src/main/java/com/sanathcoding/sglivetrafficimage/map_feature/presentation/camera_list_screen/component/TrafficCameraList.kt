@@ -9,15 +9,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.sanathcoding.sglivetrafficimage.core.navigation.Screen
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.Camera
+import com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.MapViewModel
 import com.sanathcoding.sglivetrafficimage.ui.theme.pinkRed
 
 @Composable
 fun TrafficCameraList(
     camera: Camera,
-    navController: NavHostController
+    isFavorite: Boolean,
+    navController: NavHostController,
 ) {
     Row(
         modifier = Modifier
@@ -38,7 +41,8 @@ fun TrafficCameraList(
         )
         FavoriteButton(
             modifier = Modifier.padding(8.dp),
-            color = pinkRed
+            color = pinkRed,
+            isFavorite = isFavorite
         )
     }
 }

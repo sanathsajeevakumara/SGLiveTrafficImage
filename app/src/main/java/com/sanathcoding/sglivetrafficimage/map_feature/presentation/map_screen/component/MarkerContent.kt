@@ -16,10 +16,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.Camera
 import com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_list_screen.component.FavoriteButton
+import com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.MapViewModel
 import com.sanathcoding.sglivetrafficimage.ui.theme.pinkRed
 
 @Composable
-fun MarkerContent(camera: Camera) {
+fun MarkerContent(camera: Camera, viewModel: MapViewModel) {
 
     val bitmapImage = loadUrlImage(url = camera.image)
 
@@ -54,7 +55,8 @@ fun MarkerContent(camera: Camera) {
             ) {
                 FavoriteButton(
                     modifier = Modifier.padding(8.dp),
-                    color = pinkRed
+                    color = pinkRed,
+                    isFavorite = false
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))

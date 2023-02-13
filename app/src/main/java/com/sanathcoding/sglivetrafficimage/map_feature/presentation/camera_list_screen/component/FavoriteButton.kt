@@ -1,6 +1,5 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_list_screen.component
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
@@ -14,14 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
-import com.sanathcoding.sglivetrafficimage.ui.theme.pinkRed
+import com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.MapViewModel
 
 @Composable
 fun FavoriteButton(
     modifier: Modifier = Modifier,
-    color: Color
+    color: Color,
+    isFavorite: Boolean
 ) {
-    var isFavorite by remember { mutableStateOf(false) }
 
     Surface(
         shape = CircleShape,
@@ -30,10 +29,15 @@ fun FavoriteButton(
         color = Color(0x77000000)
     ) {
 
+//        var isFavorite by remember { mutableStateOf(false) }
+        var favoriteClicked by remember {
+            mutableStateOf(isFavorite)
+        }
+
         IconToggleButton(
-            checked = isFavorite,
+            checked = favoriteClicked,
             onCheckedChange = {
-                isFavorite = !isFavorite
+                favoriteClicked = !favoriteClicked
             }
         ) {
             Icon(
@@ -47,7 +51,7 @@ fun FavoriteButton(
                 } else {
                     Icons.Default.FavoriteBorder
                 },
-                contentDescription = "Favorite Buttom"
+                contentDescription = "Favorite Button"
             )
         }
     }

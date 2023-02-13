@@ -42,7 +42,7 @@ fun MapScreen(
                     BitmapDescriptorFactory.HUE_RED
                 ),
             ) {
-                MarkerContent(camera = camera)
+                MarkerContent(camera = camera, viewModel = viewModel)
             }
         }
     }
