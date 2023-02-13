@@ -3,6 +3,7 @@ package com.sanathcoding.sglivetrafficimage.login_feature.di
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import com.sanathcoding.sglivetrafficimage.core.common.ConstValue.USER_DB_NAME
 import com.sanathcoding.sglivetrafficimage.login_feature.data.local.UserCredentialDao
 import com.sanathcoding.sglivetrafficimage.login_feature.data.local.UserCredentialDataBase
 import com.sanathcoding.sglivetrafficimage.login_feature.data.local.repository.UserCredentialRepositoryImpl
@@ -26,7 +27,7 @@ object LoginModule {
         return Room.databaseBuilder(
             app,
             UserCredentialDataBase::class.java,
-            "user_credential.db"
+            USER_DB_NAME
         ).build()
     }
 

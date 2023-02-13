@@ -9,4 +9,6 @@ object ConstValue {
     const val CAMERA_DETAIL = "camera_detail"
 
     const val BASE_URL = "https://api.data.gov.sg"
+
+    const val USER_DB_NAME = "user_credential.db"
 }
