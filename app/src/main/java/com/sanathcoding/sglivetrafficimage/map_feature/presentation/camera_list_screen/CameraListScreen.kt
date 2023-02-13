@@ -8,8 +8,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Filter
-import androidx.compose.material.icons.filled.Filter7
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -94,7 +92,7 @@ fun CameraListScreen(
                     modifier = Modifier
                         .width(screenWidth * 0.2f)
                         .clickable {
-                            viewModel.onEvent(MapEvent.onFilterButtonClicked)
+                            viewModel.onEvent(MapEvent.OnFilterButtonClicked)
                         }
                         .align(Alignment.CenterVertically)
                 )
