@@ -16,7 +16,7 @@ internal class CameraTest {
             timestamp = ""
         )
 
-        val doseMatchSearchText = camera.doseMatchSearchQuery("Camera 1005")
+        val doseMatchSearchText = camera.doseMatchSearchQuery("Camera 1004")
         assertEquals(doseMatchSearchText, true)
 
     }

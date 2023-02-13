@@ -1,24 +1,15 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_list_screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Filter
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.sanathcoding.sglivetrafficimage.R
-import com.sanathcoding.sglivetrafficimage.core.navigation.Screen
-import com.sanathcoding.sglivetrafficimage.core.util.UiText
-import com.sanathcoding.sglivetrafficimage.core.util.showToast
 import com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_list_screen.component.TrafficCameraList
 import com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.MapViewModel
 import com.vanpra.composematerialdialogs.MaterialDialog
@@ -26,7 +17,6 @@ import com.vanpra.composematerialdialogs.MaterialDialogState
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.datetime.time.timepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
-import com.vanpra.composematerialdialogs.title
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
