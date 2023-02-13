@@ -8,4 +8,6 @@ interface TrafficImageRepository {
 
     fun getTrafficImages(): Flow<Resource<List<Camera>>>
 
+    fun getTrafficImageByDateTime(dateTime: String): Flow<Resource<List<Camera>>>
+
 }
