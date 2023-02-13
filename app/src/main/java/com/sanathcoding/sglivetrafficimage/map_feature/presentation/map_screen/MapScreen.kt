@@ -1,6 +1,15 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material.icons.filled.ToggleOff
+import androidx.compose.material.icons.filled.ToggleOn
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -17,6 +26,7 @@ fun MapScreen(
 
     val state = viewModel.mapState
 
+    val scaffoldState = rememberScaffoldState()
     val mapUiSetting = remember {
         MapUiSettings(zoomControlsEnabled = false)
     }
@@ -26,23 +36,40 @@ fun MapScreen(
         position = CameraPosition.fromLatLngZoom(targetSingapore, 10f)
     }
 
-    GoogleMap(
-        modifier = Modifier
-            .fillMaxSize(),
-        properties = viewModel.mapState.properties,
-        uiSettings = mapUiSetting,
-        cameraPositionState = cameraPositionState
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        scaffoldState = scaffoldState,
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                viewModel.onEvent(MapEvent.toggleFallOutMap)
+            }) {
+                Icon(
+                    imageVector = if (viewModel.mapState.isFallOutMap) {
+                        Icons.Default.DarkMode
+                    } else Icons.Default.LightMode, contentDescription = "Toggle Fallout map "
+                )
+            }
+        }
     ) {
+        GoogleMap(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it),
+            properties = viewModel.mapState.properties,
+            uiSettings = mapUiSetting,
+            cameraPositionState = cameraPositionState
+        ) {
 
-        state.camera?.forEach { camera ->
-            MarkerInfoWindow(
-                state = MarkerState(LatLng(camera.location.latitude, camera.location.longitude)),
-                title = "Location (${camera.location.latitude}, ${camera.location.longitude})",
-                icon = BitmapDescriptorFactory.defaultMarker(
-                    BitmapDescriptorFactory.HUE_RED
-                ),
-            ) {
-                MarkerContent(camera = camera)
+            state.camera?.forEach { camera ->
+                MarkerInfoWindow(
+                    state = MarkerState(LatLng(camera.location.latitude, camera.location.longitude)),
+                    title = "Location (${camera.location.latitude}, ${camera.location.longitude})",
+                    icon = BitmapDescriptorFactory.defaultMarker(
+                        BitmapDescriptorFactory.HUE_RED
+                    ),
+                ) {
+                    MarkerContent(camera = camera)
+                }
             }
         }
     }

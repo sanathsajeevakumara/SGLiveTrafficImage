@@ -3,15 +3,16 @@ package com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.sanathcoding.sglivetrafficimage.core.common.Resource
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.Camera
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.GetTrafficImageByDateTimeUseCase
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.GetTrafficImageUseCase
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.SearchUseCase
+import com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.component.DarkMapStyle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -37,6 +38,21 @@ class MapViewModel @Inject constructor(
 
     init {
         getTrafficImages()
+    }
+
+    fun onEvent(event: MapEvent) {
+        when (event) {
+            MapEvent.toggleFallOutMap -> {
+                mapState = mapState.copy(
+                    properties = mapState.properties.copy(
+                        mapStyleOptions = if (mapState.isFallOutMap) {
+                            MapStyleOptions(DarkMapStyle.json)
+                        } else null
+                    ),
+                    isFallOutMap = !mapState.isFallOutMap
+                )
+            }
+        }
     }
 
     private val _cameraList = MutableStateFlow(cameras)
