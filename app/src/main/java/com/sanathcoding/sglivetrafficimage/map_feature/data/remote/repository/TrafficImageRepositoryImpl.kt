@@ -53,5 +53,32 @@ class TrafficImageRepositoryImpl @Inject constructor(
 
     }
 
+    override fun getTrafficImageByDateTime(dateTime: String): Flow<Resource<List<Camera>>> = flow {
+        emit(Resource.Loading())
+        val trafficImageCache = dao.getCameras().map { it.toCamera() }
+        emit(Resource.Loading(trafficImageCache))
+
+        try {
+            val remoteTrafficImage = api.getTrafficImageByDateTime(dateTime).toTrafficImage()
+            if (remoteTrafficImage.items.isNotEmpty()) {
+                remoteTrafficImage.items.map { item ->
+                    dao.deleteCameras()
+                    dao.insertCamera(item.cameras.map {it.toCameraEntity()})
+                }
+            } else emit(Resource.Success(emptyList()))
+        } catch (e: HttpException) {
+            emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
+        } catch (e: IOException) {
+            emit(
+                Resource.Error(
+                    e.localizedMessage ?: "Couldn't reach server. Check your internet connection"
+                )
+            )
+        }
+
+        val newCameraDetails = dao.getCameras().map { it.toCamera() }
+        emit(Resource.Success(newCameraDetails))
+    }
+
 
 }
