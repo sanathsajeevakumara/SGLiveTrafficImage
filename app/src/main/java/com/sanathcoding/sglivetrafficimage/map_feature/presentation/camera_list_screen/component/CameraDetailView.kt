@@ -1,4 +1,4 @@
-package com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_details_screen.component
+package com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_list_screen.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text

@@ -2,6 +2,7 @@ package com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen
 
 import android.util.Log
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -28,7 +29,7 @@ class MapViewModel @Inject constructor(
 
     var mapState by mutableStateOf(MapState())
 
-    var cameras = mutableListOf<Camera>()
+    private val cameras = mutableStateListOf<Camera>()
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery = _searchQuery.asStateFlow()
@@ -42,7 +43,7 @@ class MapViewModel @Inject constructor(
 
     fun onEvent(event: MapEvent) {
         when (event) {
-            MapEvent.toggleFallOutMap -> {
+            is MapEvent.ToggleFallOutMap -> {
                 mapState = mapState.copy(
                     properties = mapState.properties.copy(
                         mapStyleOptions = if (mapState.isFallOutMap) {
@@ -52,28 +53,41 @@ class MapViewModel @Inject constructor(
                     isFallOutMap = !mapState.isFallOutMap
                 )
             }
+            is MapEvent.OnFilterButtonClicked -> {
+                mapState = mapState.copy(
+                    camera = cameras.map { it }.reversed()
+                )
+            }
+            is MapEvent.OnSearchQuery -> {
+                cameraList.map {
+                    mapState = mapState.copy(
+                        camera = it
+                    )
+                }
+            }
         }
     }
 
     private val _cameraList = MutableStateFlow(cameras)
-    val cameraList = searchQuery
+    private val cameraList = searchQuery
         .onEach { _isSearching.update { true } }
+        .debounce(1000L)
         .combine(_cameraList) { searchQuery, cameraList ->
             if (searchUseCase.execute(searchQuery)) {
                 cameraList
             } else {
                 delay(2000L)
                 cameraList.filter {
-                it.doseMatchSearchQuery(searchQuery)
-//                    it.cameraId.contains(searchQuery)
+                    it.doseMatchSearchQuery(searchQuery)
                 }
             }
         }
-        .onEach { _isSearching.update { true } }.stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000L),
-            _cameraList.value
-        )
+        .onEach { _isSearching.update { true } }
+//        .onEach { _isSearching.update { true } }.stateIn(
+//            viewModelScope,
+//            SharingStarted.WhileSubscribed(5000L),
+//            _cameraList.value
+//        )
 
     private fun getTrafficImages() {
         getTrafficImageUseCase().onEach { resource ->
