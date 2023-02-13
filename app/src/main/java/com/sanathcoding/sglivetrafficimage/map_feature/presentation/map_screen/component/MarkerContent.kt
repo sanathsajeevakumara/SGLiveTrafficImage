@@ -25,12 +25,11 @@ fun MarkerContent(camera: Camera) {
 
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
-    val screenHeight = configuration.screenHeightDp.dp
     val bitmapImage = loadUrlImage(url = camera.image)
 
     Box(
         modifier = Modifier
-            .width(screenWidth * 0.7f)
+            .width(screenWidth * 0.75f)
             .background(
                 color = MaterialTheme.colors.onPrimary,
                 shape = RoundedCornerShape(5.dp)
@@ -41,7 +40,7 @@ fun MarkerContent(camera: Camera) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "Time Stamp: ${camera.timestamp}")
+            Text(text = "Camera Id: ${camera.cameraId}")
             Spacer(modifier = Modifier.height(16.dp))
 
             if (bitmapImage != null) {
@@ -65,6 +64,9 @@ fun MarkerContent(camera: Camera) {
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))
+            Text(text = "Time Stamp: ${camera.timestamp}")
+            Spacer(modifier = Modifier.height(8.dp))
+
             Text(
                 text = "Location",
                 fontWeight = FontWeight.Bold,
@@ -74,9 +76,6 @@ fun MarkerContent(camera: Camera) {
             Text(text = "Latitude: ${camera.location.latitude}")
             Spacer(modifier = Modifier.height(10.dp))
             Text(text = "Longitude: ${camera.location.longitude}")
-
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "Camera Id: ${camera.cameraId}")
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(

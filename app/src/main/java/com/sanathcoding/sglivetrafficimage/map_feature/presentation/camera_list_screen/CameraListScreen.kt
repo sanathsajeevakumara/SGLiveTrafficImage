@@ -37,7 +37,6 @@ fun CameraListScreen(
     val scaffoldState = rememberScaffoldState()
 
     val searchQuery by viewModel.searchQuery.collectAsState()
-    val cameraList by viewModel.cameraList.collectAsState()
     val isSearching by viewModel.isSearching.collectAsState()
 
     val pickerDate by remember { mutableStateOf(LocalDate.now()) }
@@ -82,7 +81,10 @@ fun CameraListScreen(
             ) {
                 TextField(
                     value = searchQuery,
-                    onValueChange = viewModel::onSearchTextChange,
+                    onValueChange = { query ->
+                        viewModel.onSearchTextChange(query)
+                        viewModel.onEvent(MapEvent.OnSearchQuery)
+                    },
                     modifier = Modifier.width(screenWidth * 0.8f),
                     placeholder = { Text(text = "Search") }
                 )
@@ -99,32 +101,28 @@ fun CameraListScreen(
             }
             Spacer(modifier = Modifier.height(16.dp))
 
-//            if(isSearching) {
-//                Box(modifier = Modifier.fillMaxSize()) {
-//                    CircularProgressIndicator(
-//                        modifier = Modifier.align(Alignment.Center)
-//                    )
-//                }
-//            } else
-            LazyColumn(
+            if(isSearching) {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+            } else LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f)
             ) {
-                items(cameraList) { camera ->
-                    Log.d("Camera", "Camera List size ${cameraList.size}")
-                    Log.d("Camera", "Camera Data $camera")
-                    TrafficCameraList(
-                        camera = camera,
-                        isFavorite = state.isFavorite,
-                        navController
-                    )
-//                    Text(
-//                        "Camera Id : ${camera.cameraId}",
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .padding(vertical = 16.dp)
-//                    )
+
+                state.camera?.let { cameraList ->
+                    items(cameraList) { camera ->
+                        Log.d("Camera", "Camera List size ${cameraList.size}")
+                        Log.d("Camera", "Camera Data $camera")
+                        TrafficCameraList(
+                            camera = camera,
+                            isFavorite = state.isFavorite,
+                            navController
+                        )
+                    }
                 }
             }
         }

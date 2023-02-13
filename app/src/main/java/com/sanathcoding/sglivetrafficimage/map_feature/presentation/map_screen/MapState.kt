@@ -9,5 +9,5 @@ data class MapState(
     val camera: List<Camera>? = emptyList(),
     val error: String = "",
     val isFavorite: Boolean = false,
-    val isFallOutMap: Boolean = true
+    val isFallOutMap: Boolean = true,
 )
