@@ -1,5 +1,6 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_list_screen.component
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
@@ -21,12 +22,11 @@ fun FavoriteButton(
     color: Color,
     isFavorite: Boolean
 ) {
-
     Surface(
         shape = CircleShape,
         modifier = Modifier
             .size(32.dp),
-        color = Color(0x77000000)
+        color = if (isSystemInDarkTheme()) Color(0x77000000) else Color(0x77F7F7F7)
     ) {
 
         var favoriteClicked by remember { mutableStateOf(false) }
