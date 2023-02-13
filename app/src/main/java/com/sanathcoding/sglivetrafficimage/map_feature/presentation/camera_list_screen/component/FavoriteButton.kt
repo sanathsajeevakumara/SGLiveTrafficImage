@@ -29,10 +29,10 @@ fun FavoriteButton(
         color = Color(0x77000000)
     ) {
 
-//        var isFavorite by remember { mutableStateOf(false) }
-        var favoriteClicked by remember {
-            mutableStateOf(isFavorite)
-        }
+        var favoriteClicked by remember { mutableStateOf(false) }
+//        var favoriteClicked by remember {
+//            mutableStateOf(isFavorite)
+//        }
 
         IconToggleButton(
             checked = favoriteClicked,
@@ -46,7 +46,7 @@ fun FavoriteButton(
                     scaleX = 1.3f
                     scaleY = 1.3f
                 },
-                imageVector = if (isFavorite) {
+                imageVector = if (favoriteClicked) {
                     Icons.Filled.Favorite
                 } else {
                     Icons.Default.FavoriteBorder
