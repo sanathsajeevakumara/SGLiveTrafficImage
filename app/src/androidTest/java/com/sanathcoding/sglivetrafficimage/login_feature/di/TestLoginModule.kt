@@ -3,7 +3,6 @@ package com.sanathcoding.sglivetrafficimage.login_feature.di
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
-import com.sanathcoding.sglivetrafficimage.core.common.ConstValue.USER_DB_NAME
 import com.sanathcoding.sglivetrafficimage.login_feature.data.local.UserCredentialDao
 import com.sanathcoding.sglivetrafficimage.login_feature.data.local.UserCredentialDataBase
 import com.sanathcoding.sglivetrafficimage.login_feature.data.local.repository.UserCredentialRepositoryImpl
@@ -19,15 +18,14 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object LoginModule {
+object TestLoginModule {
 
     @Singleton
     @Provides
     fun provideUserCredentialDatabase(app: Application): UserCredentialDataBase {
-        return Room.databaseBuilder(
+        return Room.inMemoryDatabaseBuilder(
             app,
             UserCredentialDataBase::class.java,
-            USER_DB_NAME
         ).build()
     }
 

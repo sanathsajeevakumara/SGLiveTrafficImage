@@ -64,8 +64,8 @@ class MapViewModel @Inject constructor(
             } else {
                 delay(2000L)
                 cameraList.filter {
-//                searchUseCase.doseMatchSearchQuery(searchQuery)
-                    it.cameraId.contains(searchQuery)
+                it.doseMatchSearchQuery(searchQuery)
+//                    it.cameraId.contains(searchQuery)
                 }
             }
         }

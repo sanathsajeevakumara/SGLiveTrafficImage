@@ -4,7 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
@@ -22,6 +22,10 @@ fun TrafficCameraList(
     isFavorite: Boolean,
     navController: NavHostController,
 ) {
+    var openDialog by remember {
+        mutableStateOf(false)
+    }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -34,9 +38,10 @@ fun TrafficCameraList(
             style = MaterialTheme.typography.body1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.clickable {
-                navController.navigate(
-                    Screen.CameraDetail.createRoute(camera.cameraId)
-                )
+//                navController.navigate(
+//                    Screen.CameraDetail.createRoute(camera.cameraId)
+//                )
+                openDialog = true
             }
         )
         FavoriteButton(
@@ -44,5 +49,9 @@ fun TrafficCameraList(
             color = pinkRed,
             isFavorite = isFavorite
         )
+    }
+
+    if (openDialog) CameraDetailPopUp(camera = camera) {
+        openDialog = false
     }
 }

@@ -13,8 +13,8 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.Camera
 
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
+@OptIn(ExperimentalGlideComposeApi::class)
 fun CameraDetailView(camera: Camera) {
     Column(
         modifier = Modifier.fillMaxSize(),

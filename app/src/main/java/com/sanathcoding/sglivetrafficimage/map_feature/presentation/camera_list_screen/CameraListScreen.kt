@@ -1,32 +1,31 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_list_screen
 
 import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Filter
-import androidx.compose.material3.Scaffold
+import androidx.compose.material.icons.filled.Filter7
+import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.sanathcoding.sglivetrafficimage.R
-import com.sanathcoding.sglivetrafficimage.core.navigation.Screen
-import com.sanathcoding.sglivetrafficimage.core.util.UiText
-import com.sanathcoding.sglivetrafficimage.core.util.showToast
 import com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_list_screen.component.TrafficCameraList
+import com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.MapEvent
 import com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.MapViewModel
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.MaterialDialogState
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.datetime.time.timepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
-import com.vanpra.composematerialdialogs.title
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -57,6 +56,9 @@ fun CameraListScreen(
     val dateDialogState = rememberMaterialDialogState()
     val timeDialogState = rememberMaterialDialogState()
 
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
 
 
     Scaffold(
@@ -76,12 +78,27 @@ fun CameraListScreen(
                 .padding(it)
         ) {
 
-            TextField(
-                value = searchQuery,
-                onValueChange = viewModel::onSearchTextChange,
+            Row(
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text(text = "Search") }
-            )
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                TextField(
+                    value = searchQuery,
+                    onValueChange = viewModel::onSearchTextChange,
+                    modifier = Modifier.width(screenWidth * 0.8f),
+                    placeholder = { Text(text = "Search") }
+                )
+                Icon(
+                    imageVector = Icons.Default.FilterList,
+                    contentDescription = "Order By",
+                    modifier = Modifier
+                        .width(screenWidth * 0.2f)
+                        .clickable {
+                            viewModel.onEvent(MapEvent.onFilterButtonClicked)
+                        }
+                        .align(Alignment.CenterVertically)
+                )
+            }
             Spacer(modifier = Modifier.height(16.dp))
 
 //            if(isSearching) {
@@ -91,17 +108,25 @@ fun CameraListScreen(
 //                    )
 //                }
 //            } else
-                LazyColumn(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f)
             ) {
-                items(cameraList.size) { i ->
+                items(cameraList) { camera ->
+                    Log.d("Camera", "Camera List size ${cameraList.size}")
+                    Log.d("Camera", "Camera Data $camera")
                     TrafficCameraList(
-                        camera = cameraList[i],
+                        camera = camera,
                         isFavorite = state.isFavorite,
                         navController
                     )
+//                    Text(
+//                        "Camera Id : ${camera.cameraId}",
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .padding(vertical = 16.dp)
+//                    )
                 }
             }
         }
@@ -109,7 +134,7 @@ fun CameraListScreen(
         ShowDatePicker(dateDialogState, timeDialogState, pickerDate)
 
         ShowTimePicker(timeDialogState, viewModel, formattedDate, formattedTime, pickerTime)
-        
+
     }
 }
 

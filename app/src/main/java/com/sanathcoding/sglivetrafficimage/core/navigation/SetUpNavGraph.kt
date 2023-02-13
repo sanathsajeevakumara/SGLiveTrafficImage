@@ -5,7 +5,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.sanathcoding.sglivetrafficimage.core.navigation.NavigationConst.TEST_ROUTE
-import com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_details_screen.CameraDetailScreen
 import com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.NewHome
 import com.sanathcoding.sglivetrafficimage.login_feature.presentation.loginScreen.LoginScreen
 
@@ -22,12 +21,6 @@ fun SetupNavGraph(navController: NavHostController) {
         }
         composable(Screen.Home.route) {
             NewHome(navController)
-        }
-        composable(Screen.CameraDetail.route) { naveBackStackEntry ->
-            val cameraId = naveBackStackEntry.arguments?.getString("cameraId")
-            cameraId?.let {
-                CameraDetailScreen(it)
-            }
         }
     }
 }
