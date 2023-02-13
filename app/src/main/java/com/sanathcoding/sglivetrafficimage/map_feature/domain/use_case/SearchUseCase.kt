@@ -13,19 +13,4 @@ class SearchUseCase {
         }
         return true
     }
-
-    fun doseMatchSearchQuery(query: String): Boolean {
-        Log.d("Camera", "Camera query $query")
-        val matchingCombinations = listOf(
-            "Camera$query",
-            "Camera $query",
-            "$query",
-        )
-        Log.d("Camera", "Camera List ${matchingCombinations.any {
-            it.contains(query, true)
-        }}")
-        return matchingCombinations.any {
-            it.contains(query, true)
-        }
-    }
 }
