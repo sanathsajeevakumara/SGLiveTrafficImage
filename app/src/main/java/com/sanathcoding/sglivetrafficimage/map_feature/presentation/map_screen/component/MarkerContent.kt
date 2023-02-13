@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -20,12 +21,16 @@ import com.sanathcoding.sglivetrafficimage.map_feature.presentation.map_screen.M
 import com.sanathcoding.sglivetrafficimage.ui.theme.pinkRed
 
 @Composable
-fun MarkerContent(camera: Camera, viewModel: MapViewModel) {
+fun MarkerContent(camera: Camera) {
 
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+    val screenHeight = configuration.screenHeightDp.dp
     val bitmapImage = loadUrlImage(url = camera.image)
 
     Box(
         modifier = Modifier
+            .width(screenWidth * 0.7f)
             .background(
                 color = MaterialTheme.colors.onPrimary,
                 shape = RoundedCornerShape(5.dp)
@@ -43,7 +48,7 @@ fun MarkerContent(camera: Camera, viewModel: MapViewModel) {
                 Image(
                     bitmapImage.asImageBitmap(),
                     "Image Location",
-                    Modifier.size(150.dp)
+                    Modifier.fillMaxWidth()
                 )
             } else Text("Loading Image...")
 
