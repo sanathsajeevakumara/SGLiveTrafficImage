@@ -36,7 +36,7 @@ fun LoginScreen(
     val state = viewModel.state
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
-    var revealPassword: MutableState<Boolean> = remember {
+    val revealPassword: MutableState<Boolean> = remember {
         mutableStateOf(false)
     }
 
