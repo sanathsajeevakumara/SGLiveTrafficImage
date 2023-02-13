@@ -7,5 +7,7 @@ data class MapState(
     val isLoading: Boolean = false,
     val properties: MapProperties = MapProperties(),
     val camera: List<Camera>? = emptyList(),
-    val error: String = ""
+    val error: String = "",
+    val isFavorite: Boolean = false,
+    val isFallOutMap: Boolean = true
 )

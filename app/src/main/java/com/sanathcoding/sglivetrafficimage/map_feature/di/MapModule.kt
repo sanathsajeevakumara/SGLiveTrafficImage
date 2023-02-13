@@ -12,6 +12,7 @@ import com.sanathcoding.sglivetrafficimage.map_feature.data.remote.repository.Tr
 import com.sanathcoding.sglivetrafficimage.map_feature.data.util.GsonParser
 import com.sanathcoding.sglivetrafficimage.map_feature.data.util.JsonParser
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.repository.TrafficImageRepository
+import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.GetTrafficImageByDateTimeUseCase
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.GetTrafficImageUseCase
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.SearchUseCase
 import dagger.Module
@@ -30,6 +31,18 @@ object MapModule {
     @Singleton
     fun provideGetTrafficImageUseCase(repository: TrafficImageRepository): GetTrafficImageUseCase {
         return GetTrafficImageUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetTrafficImageByDateTimeUseCase(repository: TrafficImageRepository): GetTrafficImageByDateTimeUseCase {
+        return GetTrafficImageByDateTimeUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchUseCase(repository: TrafficImageRepository): SearchUseCase {
+        return SearchUseCase()
     }
 
     @Provides
