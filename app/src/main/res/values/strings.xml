@@ -14,4 +14,6 @@
     <string name="password_not_match_error">Password not match!</string>
     <string name="camera_id_required">Camera id is required</string>
     <string name="query_blank_error">Query can not blank</string>
+    <string name="http_exception">An unexpected error occurred</string>
+    <string name="io_exception">Couldn\'t reach server. Check your internet connection</string>
 </resources>
