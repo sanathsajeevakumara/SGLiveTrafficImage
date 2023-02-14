@@ -6,6 +6,7 @@ object ConstValue {
     const val PREFERENCES_NAME = "name_preferences"
     const val USER_NAME = "userName"
     const val LOGIN = "login"
+    const val HOME = "home"
     const val CAMERA_DETAIL = "camera_detail"
 
     const val BASE_URL = "https://api.data.gov.sg"
