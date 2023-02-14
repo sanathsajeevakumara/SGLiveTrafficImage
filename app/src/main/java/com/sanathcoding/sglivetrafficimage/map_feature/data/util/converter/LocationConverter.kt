@@ -1,4 +1,4 @@
-package com.sanathcoding.sglivetrafficimage.map_feature.data
+package com.sanathcoding.sglivetrafficimage.map_feature.data.util.converter
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
@@ -8,22 +8,22 @@ import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.ImageMetaDat
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.Location
 
 @ProvidedTypeConverter
-class ImageMetaDataConverter(
+class LocationConverter(
     private val jsonParser: JsonParser
 ) {
     @TypeConverter
-    fun fromImageMetaDataJson(json: String): ImageMetaData {
-        return jsonParser.fromJson<ImageMetaData>(
+    fun fromLocationJson(json: String): Location {
+        return jsonParser.fromJson<Location>(
             json,
-            object : TypeToken<ImageMetaData>(){}.type
-        ) ?: ImageMetaData(height = 0, md5 = "", width = 0)
+            object : TypeToken<Location>(){}.type
+        ) ?: Location(latitude = 0.0, longitude = 0.0)
     }
 
     @TypeConverter
-    fun toImageMetaDataJson(imageMetaData: ImageMetaData): String {
+    fun toLocationJson(location: Location): String {
         return jsonParser.toJson(
-            imageMetaData,
-            object : TypeToken<ImageMetaData>(){}.type
+            location,
+            object : TypeToken<Location>(){}.type
         ) ?: ""
     }
 }

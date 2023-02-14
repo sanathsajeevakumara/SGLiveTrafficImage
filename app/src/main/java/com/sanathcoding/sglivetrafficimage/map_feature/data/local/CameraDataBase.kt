@@ -3,8 +3,8 @@ package com.sanathcoding.sglivetrafficimage.map_feature.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.sanathcoding.sglivetrafficimage.map_feature.data.ImageMetaDataConverter
-import com.sanathcoding.sglivetrafficimage.map_feature.data.LocationConverter
+import com.sanathcoding.sglivetrafficimage.map_feature.data.util.converter.ImageMetaDataConverter
+import com.sanathcoding.sglivetrafficimage.map_feature.data.util.converter.LocationConverter
 
 @Database(
     entities = [CameraEntity::class],

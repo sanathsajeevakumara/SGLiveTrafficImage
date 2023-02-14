@@ -1,12 +1,11 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.di
 
 import android.app.Application
-import android.content.Context
 import androidx.room.Room
 import com.google.gson.Gson
 import com.sanathcoding.sglivetrafficimage.core.common.ConstValue.BASE_URL
-import com.sanathcoding.sglivetrafficimage.map_feature.data.ImageMetaDataConverter
-import com.sanathcoding.sglivetrafficimage.map_feature.data.LocationConverter
+import com.sanathcoding.sglivetrafficimage.map_feature.data.util.converter.ImageMetaDataConverter
+import com.sanathcoding.sglivetrafficimage.map_feature.data.util.converter.LocationConverter
 import com.sanathcoding.sglivetrafficimage.map_feature.data.local.CameraDataBase
 import com.sanathcoding.sglivetrafficimage.map_feature.data.remote.TrafficImageApi
 import com.sanathcoding.sglivetrafficimage.map_feature.data.remote.repository.TrafficImageRepositoryImpl
@@ -17,7 +16,6 @@ import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.GetTraffi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
