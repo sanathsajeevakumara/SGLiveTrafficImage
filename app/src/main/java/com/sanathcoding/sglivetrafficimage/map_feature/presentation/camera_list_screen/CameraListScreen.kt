@@ -38,6 +38,7 @@ fun CameraListScreen(
 
     val searchQuery by viewModel.searchQuery.collectAsState()
     val isSearching by viewModel.isSearching.collectAsState()
+    val cameraList by viewModel.cameraList.collectAsState()
 
     val pickerDate by remember { mutableStateOf(LocalDate.now()) }
     val pickerTime by remember { mutableStateOf(LocalTime.now()) }
@@ -81,10 +82,7 @@ fun CameraListScreen(
             ) {
                 TextField(
                     value = searchQuery,
-                    onValueChange = { query ->
-                        viewModel.onSearchTextChange(query)
-                        viewModel.onEvent(MapEvent.OnSearchQuery)
-                    },
+                    onValueChange = viewModel::onSearchTextChange,
                     modifier = Modifier.width(screenWidth * 0.8f),
                     placeholder = { Text(text = "Search") }
                 )
@@ -113,17 +111,25 @@ fun CameraListScreen(
                     .weight(1f)
             ) {
 
-                state.camera?.let { cameraList ->
-                    items(cameraList) { camera ->
-                        Log.d("Camera", "Camera List size ${cameraList.size}")
-                        Log.d("Camera", "Camera Data $camera")
-                        TrafficCameraList(
-                            camera = camera,
-                            isFavorite = state.isFavorite,
-                            navController
-                        )
-                    }
+//                state.camera?.let { cameraList ->
+//                    items(cameraList) { camera ->
+//                        TrafficCameraList(
+//                            camera = camera,
+//                            isFavorite = state.isFavorite,
+//                            navController
+//                        )
+//                    }
+//                }
+
+                Log.d("Screen", "CameraList size: ${cameraList.size}")
+                items(cameraList) { camera ->
+                    TrafficCameraList(
+                        camera = camera,
+                        isFavorite = state.isFavorite,
+                        navController
+                    )
                 }
+
             }
         }
 

@@ -6,15 +6,4 @@ data class Camera(
     val imageMetadata: ImageMetaData,
     val location: Location,
     val timestamp: String
-) {
-    fun doseMatchSearchQuery(query: String): Boolean {
-        val matchingCombinations = listOf(
-            "Camera$query",
-            "Camera $query",
-            "$query",
-        )
-        return matchingCombinations.any {
-            it.contains(query, true)
-        }
-    }
-}
+)
