@@ -1,11 +1,10 @@
-package com.sanathcoding.sglivetrafficimage.map_feature.data
+package com.sanathcoding.sglivetrafficimage.map_feature.data.util.converter
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.google.gson.reflect.TypeToken
 import com.sanathcoding.sglivetrafficimage.map_feature.data.util.JsonParser
 import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.ImageMetaData
-import com.sanathcoding.sglivetrafficimage.map_feature.domain.model.Location
 
 @ProvidedTypeConverter
 class ImageMetaDataConverter(

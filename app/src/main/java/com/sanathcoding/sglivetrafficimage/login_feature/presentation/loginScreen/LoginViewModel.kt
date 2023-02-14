@@ -102,7 +102,7 @@ class LoginViewModel @Inject constructor(
                     insertUserToDataBase(userName, password)
                     saveUserNameToDataStore(userName)
                     withContext(Dispatchers.Main) {
-                        validationEventChannel.send(ValidateEvent.DataAdded)
+                        validationEventChannel.send(ValidateEvent.NewUserCreated)
                     }
                 } else {
                     passwordFromDb = repository.getPasswordByUserName(userName).password

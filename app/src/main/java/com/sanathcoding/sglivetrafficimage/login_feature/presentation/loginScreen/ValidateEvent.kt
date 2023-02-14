@@ -2,6 +2,6 @@ package com.sanathcoding.sglivetrafficimage.login_feature.presentation.loginScre
 
 sealed interface ValidateEvent {
     object Success: ValidateEvent
-    object DataAdded: ValidateEvent
+    object NewUserCreated: ValidateEvent
     object PasswordNotMatch: ValidateEvent
 }

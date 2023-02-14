@@ -1,5 +1,7 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.data.remote.repository
 
+import android.content.Context
+import com.sanathcoding.sglivetrafficimage.R
 import com.sanathcoding.sglivetrafficimage.core.common.Resource
 import com.sanathcoding.sglivetrafficimage.map_feature.data.local.CameraDao
 import com.sanathcoding.sglivetrafficimage.map_feature.data.local.mapper.toCamera
@@ -14,13 +16,10 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-
-private const val HREF = "2023-02-11T15:50:47+08:00"
-private val ENCODED_HREF = java.net.URLEncoder.encode(HREF, "utf-8")
-
 class TrafficImageRepositoryImpl @Inject constructor(
     private val api: TrafficImageApi,
-    private val dao: CameraDao
+    private val dao: CameraDao,
+    private val context: Context
 ) : TrafficImageRepository {
     override fun getTrafficImages(): Flow<Resource<List<Camera>>> = flow {
 
@@ -39,11 +38,15 @@ class TrafficImageRepositoryImpl @Inject constructor(
 
 
         } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
+            emit(
+                Resource.Error(
+                    e.localizedMessage ?: context.getString(R.string.http_exception)
+                )
+            )
         } catch (e: IOException) {
             emit(
                 Resource.Error(
-                    e.localizedMessage ?: "Couldn't reach server. Check your internet connection"
+                    e.localizedMessage ?: context.getString(R.string.io_exception)
                 )
             )
         }
@@ -67,11 +70,15 @@ class TrafficImageRepositoryImpl @Inject constructor(
                 }
             } else emit(Resource.Success(emptyList()))
         } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
+            emit(
+                Resource.Error(
+                    e.localizedMessage ?: context.getString(R.string.http_exception)
+                )
+            )
         } catch (e: IOException) {
             emit(
                 Resource.Error(
-                    e.localizedMessage ?: "Couldn't reach server. Check your internet connection"
+                    e.localizedMessage ?: context.getString(R.string.io_exception)
                 )
             )
         }

@@ -33,10 +33,6 @@ class UserCredentialRepositoryImpl @Inject constructor(
         return dao.doseUserExist(name)
     }
 
-//    override fun getUserByUserName(name: String): UserCredentialEntity {
-//        return dao.getUserByUserName(name)
-//    }
-
     override suspend fun getPasswordByUserName(name: String): UserCredentialEntity {
         return dao.getPasswordByUserName(name)
     }
