@@ -1,6 +1,5 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.presentation.camera_list_screen
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -92,7 +91,8 @@ fun CameraListScreen(
                     modifier = Modifier
                         .width(screenWidth * 0.2f)
                         .clickable {
-                            viewModel.onEvent(MapEvent.OnFilterButtonClicked)
+                            viewModel.ascending.value = !viewModel.ascending.value
+                            viewModel.onEvent(MapEvent.OnSort)
                         }
                         .align(Alignment.CenterVertically)
                 )
@@ -110,18 +110,6 @@ fun CameraListScreen(
                     .fillMaxSize()
                     .weight(1f)
             ) {
-
-//                state.camera?.let { cameraList ->
-//                    items(cameraList) { camera ->
-//                        TrafficCameraList(
-//                            camera = camera,
-//                            isFavorite = state.isFavorite,
-//                            navController
-//                        )
-//                    }
-//                }
-
-                Log.d("Screen", "CameraList size: ${cameraList.size}")
                 items(cameraList) { camera ->
                     TrafficCameraList(
                         camera = camera,
@@ -129,7 +117,6 @@ fun CameraListScreen(
                         navController
                     )
                 }
-
             }
         }
 
