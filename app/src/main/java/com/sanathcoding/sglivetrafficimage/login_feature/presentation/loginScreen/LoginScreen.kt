@@ -9,11 +9,9 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -49,7 +47,7 @@ fun LoginScreen(
                     context.showToast(UiText.StringResource(R.string.login_successful))
                     navController.navigate(Screen.Home.route)
                 }
-                ValidateEvent.DataAdded -> {
+                ValidateEvent.NewUserCreated -> {
                     context.showToast(UiText.StringResource(R.string.account_created))
                     navController.navigate(Screen.Home.route)
                 }

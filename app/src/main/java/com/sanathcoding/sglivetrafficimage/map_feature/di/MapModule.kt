@@ -1,6 +1,7 @@
 package com.sanathcoding.sglivetrafficimage.map_feature.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.google.gson.Gson
 import com.sanathcoding.sglivetrafficimage.core.common.ConstValue.BASE_URL
@@ -16,6 +17,7 @@ import com.sanathcoding.sglivetrafficimage.map_feature.domain.use_case.GetTraffi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -33,13 +35,23 @@ object MapModule {
 
     @Provides
     @Singleton
-    fun provideGetTrafficImageByDateTimeUseCase(repository: TrafficImageRepository): GetTrafficImageByDateTimeUseCase {
+    fun provideGetTrafficImageByDateTimeUseCase(repository: TrafficImageRepository):
+            GetTrafficImageByDateTimeUseCase {
         return GetTrafficImageByDateTimeUseCase(repository)
     }
+
     @Provides
     @Singleton
-    fun provideTrafficImageRepository(api: TrafficImageApi, db: CameraDataBase): TrafficImageRepository {
-        return TrafficImageRepositoryImpl(api, db.dao)
+    fun provideTrafficImageRepository(
+        api: TrafficImageApi,
+        db: CameraDataBase,
+        app: Application
+    ): TrafficImageRepository {
+        return TrafficImageRepositoryImpl(
+            api,
+            db.dao,
+            app
+        )
     }
 
     @Provides
